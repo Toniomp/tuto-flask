@@ -8,7 +8,7 @@
     <div class="sample">
         {% for x in books %}
         <!-- <> -->
-        <a href="{{ url_for('detail', id= x.id) }}">
+        <a href="{{ url_for('detail', id= x.id -1) }}">
             <img src="{{ url_for('static', filename='images/'+x.image)}}" alt="{{x.title}}" title="{{x.title}}">
         </a>
         {% endfor %}
