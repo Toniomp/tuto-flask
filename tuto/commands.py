@@ -64,3 +64,11 @@ def passwd(username:str, new_passwd:str):
     db.session.commit()
 
 
+@app.cli.command()
+@click.argument('genre_name')
+def add_genre(genre_name: str): # mettre un tiret du 6 lors de l'appel de la commande
+    '''Ajouter un nouveau genre dans la table Genre'''
+    from .models import Genre
+    genre = Genre(name=genre_name)
+    db.session.add(genre)
+    db.session.commit()
