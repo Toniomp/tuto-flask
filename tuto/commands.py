@@ -54,7 +54,7 @@ def newuser(username:str, password:str):
 #@click.argument('old_passwd')
 @click.argument('new_passwd')
 def passwd(username:str, new_passwd:str):
-    '''changhe user password'''
+    '''change user password'''
     from .models import User
     from hashlib import sha256
     m = sha256()
@@ -67,8 +67,22 @@ def passwd(username:str, new_passwd:str):
 @app.cli.command()
 @click.argument('genre_name')
 def add_genre(genre_name: str): # mettre un tiret du 6 lors de l'appel de la commande
-    '''Ajouter un nouveau genre dans la table Genre'''
+    '''ajoute un nouveau genre dans la table Genre'''
     from .models import Genre
     genre = Genre(name=genre_name)
     db.session.add(genre)
     db.session.commit()
+
+@app.cli.command()
+@click.argument('book_id')
+@click.argument('genre_name')
+def add_genre_to_book(book_id: int, genre_name: str):
+    '''ajoute un genre à un livre dans la base de données'''
+    from .models import Book, Genre, db
+    
+    book = Book.query.get(book_id)
+    genre = Genre.query.filter_by(name=genre_name).first()
+    if (book is not None) and genre :
+        if genre not in book.genres:
+            book.genres.append(genre)
+            db.session.commit()

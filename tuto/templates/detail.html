@@ -8,6 +8,16 @@
     <div class="sample">
         <h1>{{ b.title }}</b></h1>
         <img src="{{ url_for('static', filename='images/'+b.image)}}" alt="{{b.title}}" title="{{b.title}}" onclick="header('localhost/names')">
+        <div style="padding: 3%;">
+            <h4>Genres: </h4>
+            <div style="display: inline-flex;">
+                {% for genre in b.genres %}
+                    <p>{{ genre.name }}, </p>
+                {% else %}
+                    <p>Aucun genre associé</p>
+                {% endfor %}
+            </div>
+        </div>
         <ul>
             <li>Author {{ b.author }}</li>
             <li>Price {{ b.price }}</li>

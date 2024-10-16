@@ -17,7 +17,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="#">Fixed navbar</a>
+                  <a class="navbar-brand" href="#">My Library</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -27,7 +27,14 @@
                         <a class="nav-link active" aria-current="page" href="{{ url_for('home')}}">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('login')}}">Login</a>
+                        {% if current_user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link active" href="{{ url_for('logout') }}">LOGOUT
+                          <span class=" glyphicon glyphicon-log-out" title="Logout">
+                            </span></a>
+                        </li>
+                        {% else %}
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('login')}}">LOGIN</a>
+                        {% endif %}
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Link</a>
@@ -39,10 +46,6 @@
                     <ul class="nav navbar-nav navbar-right">
                       {% if current_user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link active" >{{ current_user.username }}</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="{{ url_for('logout') }}">LOGOUT
-                          <span class=" glyphicon glyphicon-log-out" title="Logout">
-                            </span></a>
-                        </li>
                       {% endif %}
                     </ul>
                     <form class="d-flex" role="search">
