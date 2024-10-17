@@ -1,6 +1,6 @@
 from .app import app, db
 from flask import render_template, url_for, redirect, request
-from .models import get_author, get_sample, Author, User
+from .models import get_author, get_sample, Author, User, Book
 from flask_wtf import FlaskForm
 from wtforms import StringField , HiddenField, PasswordField
 from wtforms.validators import DataRequired
@@ -86,3 +86,18 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
                    
+@app.route('/<username>/favorites')
+@login_required
+def user_favorites(username):
+    user = User.query.get(username)
+    return render_template('favorites.html', user=user, favorites=user.favorites)
+
+
+@app.route('/<username>/add_favorite/<int:book_id>')
+@login_required
+def add_favorite(username, book_id):
+    user = User.query.get(username)
+    book = Book.query.get(book_id)
+    user.add_to_favorites(book)
+    db.session.commit()
+    return render_template("detail.html",b=book)

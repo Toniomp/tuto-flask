@@ -17,7 +17,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <div class="container-fluid">
-                  <a class="navbar-brand" href="#">My Library</a>
+                  <a class="navbar-brand" href="{{ url_for('home')}}">My Books!</a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -28,24 +28,22 @@
                       </li>
                       <li class="nav-item">
                         {% if current_user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link active" href="{{ url_for('logout') }}">LOGOUT
-                          <span class=" glyphicon glyphicon-log-out" title="Logout">
-                            </span></a>
+                        <li class="nav-item"><a class="nav-link active" >{{ current_user.username }}</a></li>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="{{ url_for('user_favorites', username= current_user.username) }}">Favoris</a>
                         </li>
-                        {% else %}
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('login')}}">LOGIN</a>
                         {% endif %}
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                        
                       </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       {% if current_user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link active" >{{ current_user.username }}</a></li>
+                      <li class="nav-item"><a class="nav-link active" href="{{ url_for('logout') }}">LOGOUT
+                        <span class=" glyphicon glyphicon-log-out" title="Logout">
+                          </span></a>
+                      </li>
+                      {% else %}
+                      <a class="nav-link active" aria-current="page" href="{{ url_for('login')}}">LOGIN</a>
                       {% endif %}
                     </ul>
                     <form class="d-flex" role="search">
@@ -66,7 +64,7 @@
           
           <footer class="footer mt-auto py-3 bg-light">
             <div class="container">
-              <span class="text-muted">Place sticky footer content here.</span>
+
             </div>
           </footer>
           {% block scripts %}

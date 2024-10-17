@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Favoris de {{ user.username }}</h1>
+    <ul>
+        {% for book in favorites %}
+            <li style="display: flex;align-items: center; padding-bottom: 10px;">
+                <h3>{{ book.title }}:</b></h3>
+                <a href="{{ url_for('detail', id= book.id -1) }}">
+                    <img src="{{ url_for('static', filename='images/'+book.image)}}" alt="{{book.title}}" title="{{book.title}}">
+                </a>
+            </li>
+        {% else %}
+            <li>Aucun livre favori pour l'instant.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -86,3 +86,7 @@ def add_genre_to_book(book_id: int, genre_name: str):
         if genre not in book.genres:
             book.genres.append(genre)
             db.session.commit()
+
+
+
+
