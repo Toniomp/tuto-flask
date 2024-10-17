@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Résultats de la recherche pour "{{ search }}"</h1>
+
+    {% if authors %}
+        <ul>
+            {% for author in authors %}
+                <li>
+                    {{ author.name }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun auteur trouvé.</p>
+    {% endif %}
+    {% if books %}
+    <ul>
+        {% for book in books %}
+            <li>
+                {{ book.title }}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

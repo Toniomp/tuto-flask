@@ -101,3 +101,13 @@ def add_favorite(username, book_id):
     user.add_to_favorites(book)
     db.session.commit()
     return render_template("detail.html",b=book)
+
+@app.route('/search_author')
+def search_author():
+    search = request.args.get('search')    
+    authors = Author.query.filter(Author.name.ilike(f'%{search}%')).all()
+    books = Book.query.filter(Book.title.ilike(f'%{search}%')).all()
+    if authors or books:
+        return render_template('search-results.html', authors=authors, books=books, search=search)
+
+    
