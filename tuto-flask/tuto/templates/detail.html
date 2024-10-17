@@ -19,10 +19,12 @@
             </div>
         </div>
         <ul>
-            <li>Author {{ b.author }}</li>
+            <li>Author {{ b.author.name }}</li>
             <li>Price {{ b.price }}</li>
             <li>URL : <a href="{{ b.url }}">lien</a></li>
+        {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('add_favorite', username= current_user.username, book_id=b.id) }}" class="btn btn-primary">Ajouter aux favoris</a></li>    
+            {% endif %}
         </ul>
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('edit_author', id= b.author.id) }}">Editer l'auteur</a>

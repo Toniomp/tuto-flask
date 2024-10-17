@@ -9,7 +9,7 @@
         {% for x in books %}
         <!-- <> -->
         <a href="{{ url_for('detail', id= x.id -1) }}">
-            <img src="{{ url_for('static', filename='images/'+x.image)}}" alt="{{x.title}}" title="{{x.title}}" style="padding: 10px 10px;">
+            <img class="books-img-h" src="{{ url_for('static', filename='images/'+x.image)}}" alt="{{x.title}}" title="{{x.title}}" style="padding: 10px 10px;">
         </a>
         {% endfor %}
     </div>

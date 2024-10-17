@@ -6,7 +6,7 @@
     {% if authors %}
         <ul>
             {% for author in authors %}
-                <li>
+                <li class="search_res">
                     {{ author.name }}
                 </li>
             {% endfor %}
@@ -17,10 +17,13 @@
     {% if books %}
     <ul>
         {% for book in books %}
-            <li>
+            <li class="search_res">
                 {{ book.title }}
+                <a href="{{ url_for('detail', id= book.id -1) }}">Voir</a>
             </li>
         {% endfor %}
     </ul>
+    {% else %}
+        <p>Aucun livre trouvé.</p>
     {% endif %}
 {% endblock %}
